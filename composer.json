@@ -1,0 +1,8 @@
+{
+    "name": "pc/boutique-laura",
+    "description": "boutique-laura",
+    "require": {
+        "firebase/php-jwt": "^6.0",
+        "phpmailer/phpmailer": "^6.6"
+    }
+}

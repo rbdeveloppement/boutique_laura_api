@@ -1,0 +1,30 @@
+{
+  "db": {
+    "host": "localhost",
+    "port": "3306",
+    "dbName": "laura-boutique",
+    "user": "root",
+    "pass": ""
+  },
+  "hash": {
+    "prefix": "$argon2id$v=19$m=12,t=2,p=1$"
+  },
+  "jwt": {
+    "secret": "hAgBizEu5Z6q1234J"
+  },
+  "restricted": {
+    "GET/appUser": "$userRole ==1;",
+    "GET/appUser/:id": "$userRole == 1 || $userId == $id;",
+    "GET/comment": "$userRole > 0;"
+  },
+  "mailer": {
+    "main": {
+      "host": "smtp.gmail.com",
+      "port": 587,
+      "auth": true,
+      "secure": "tsl",
+      "user": "rbdeveloppement12@gmail.com",
+      "pass": "fdrmafoqeoueasby"
+    }
+  }
+}

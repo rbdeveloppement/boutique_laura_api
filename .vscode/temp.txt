@@ -1,0 +1,15 @@
+
+$dbs = new DatabaseService(null);
+        $query_resp = $dbs->query("SELECT table_name FROM information_schema.tables WHERE table_schema = ?", ['db_blog']);
+        $rows = $query_resp->statement->fetchAll(PDO::FETCH_COLUMN);
+        foreach($rows as $tableName){
+            $controllerFile = "controllers/$tableName.controller.php";
+            if(file_exists($controllerFile)) {
+                unlink($controllerFile);
+            }
+            if(!file_exists($controllerFile)){
+                $fileContent = "<?php class ".ucfirst($tableName)."Controller extends DatabaseController {\r\n\r\n}?>";
+                file_put_contents($controllerFile, $fileContent);
+                echo ucfirst($tableName)."Controller created\r\n";
+            }
+        }
