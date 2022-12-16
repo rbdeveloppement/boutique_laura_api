@@ -5,7 +5,7 @@ require_once("vendor/autoload.php");
 
 
 $_ENV["current"] = "dev";
-$config = file_get_contents("configs/" . $_ENV["current"] . ".config.json");
+$config = file_get_contents("configs/".$_ENV["current"].".config.json");
 $_ENV['config'] = json_decode($config);
 
 if ($_ENV["current"] == "dev") {
@@ -36,11 +36,11 @@ $route = explode('/', $route);
 
 $controllerName = array_shift($route);
 
-if ($_ENV["current"] == "dev" && $controllerName == 'init') {
+if ($_ENV["current"] == "dev" && $controllerName == '') {
     $dbs = new DatabaseService(null);
     $query_resp = $dbs->query("SELECT table_name FROM information_schema.tables
                                      WHERE table_schema = ?", ['laura-boutique']);
-    $rows = $query_resp->statement->fetchAll(PDO::FETCH_COLUMN);
+    $rows = $query_resp->statment->fetchAll(PDO::FETCH_COLUMN);
     foreach ($rows as $tableName) {
         $controllerFile = "controllers/$tableName.controller.php";
         if (!file_exists($controllerFile)) {
@@ -59,7 +59,7 @@ require_once 'middlewares/auth.middleware.php';
 
 $req = $_SERVER['REQUEST_METHOD'] . "/" . trim($_SERVER["REQUEST_URI"], '/');
 if ($_SERVER['HTTP_HOST'] == 'localhost') {
-    $req = str_replace('/boutique_laura', '', $req);
+    $req = str_replace('/boutique-laura', '', $req);
 }
 $am = new AuthMiddleware($req);
 $am->verify();
