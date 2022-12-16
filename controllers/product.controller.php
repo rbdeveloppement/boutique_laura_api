@@ -24,8 +24,8 @@ public function affectDataToRow(&$row, $sub_rows){
         }
     }
 
-    if(isset($sub_rows['comment'])){
-        $comments = array_values(array_filter($sub_rows['comment'], function($item) use ($row) { 
+    if(isset($sub_rows['sub_category'])){
+        $comments = array_values(array_filter($sub_rows['sub_category'], function($item) use ($row) { 
             return $item->Id_article == $row->Id_article;
         }));
         if(isset($comments)){
